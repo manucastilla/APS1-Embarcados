@@ -37,6 +37,20 @@
 #define BUT2_PIO_IDX 30
 #define BUT2_PIO_IDX_MASK (1u << BUT2_PIO_IDX)
 
+// Configuracoes do botao3
+#define BUT3_PIO PIOC
+#define BUT3_PIO_ID ID_PIOC
+#define BUT3_PIO_IDX 13
+#define BUT3_PIO_IDX_MASK (1u << BUT3_PIO_IDX)
+
+// Configuracoes do botao3
+#define BUT_PIO PIOA
+#define BUT_PIO_ID ID_PIOA
+#define BUT_PIO_IDX 11
+#define BUT_PIO_IDX_MASK (1u << BUT_PIO_IDX)
+
+
+
 //Configurações buzzer
 #define BUZZER_PIO PIOA
 #define BUZZER_PIO_ID ID_PIOA
@@ -54,16 +68,28 @@ void sing(int freq[], int tempo[], int size)
 	//NECESSÁRIO AJUSTAR ALGUMAS DAS CONTAS PARA MELHORES RESULTADOS
 	for (int note = 0; note < size; note++)
 	{
+		
 		int delay = 1000000 / freq[note];
 
 		pio_clear(LED2_PIO, LED2_PIO_IDX_MASK);
 
 		for (int i = 0; i < 1000 * tempo[note] / delay; i++)
 		{
+			
+			if (!pio_get(BUT3_PIO, PIO_INPUT ,BUT3_PIO_IDX_MASK))
+			{
+				delay_ms(500);
+				int botao = pio_get(BUT_PIO, PIO_INPUT ,BUT_PIO_IDX_MASK);
+				while(botao){
+					botao = pio_get(BUT_PIO, PIO_INPUT ,BUT_PIO_IDX_MASK);
+					delay_ms(50);
+				}
+			}
+			
 			pio_set(BUZZER_PIO, BUZZER_PIO_IDX_MASK);
 			delay_us(delay / 2);
 			pio_clear(BUZZER_PIO, BUZZER_PIO_IDX_MASK);
-			delay_us(delay / 2);
+			delay_us(delay / 2);cc
 		}
 		pio_set(LED2_PIO, LED2_PIO_IDX_MASK);
 		delay_us(tempo[note] * 1100); //velocidade entre cada nota
@@ -74,6 +100,8 @@ void sing(int freq[], int tempo[], int size)
 void init(void)
 {
 	sysclk_init();
+	
+	WDT->WDT_MR = WDT_MR_WDDIS;
 
 	//Inicialização LEDs
 	pmc_enable_periph_clk(LED_PIO_ID);
@@ -88,7 +116,7 @@ void init(void)
 	pmc_enable_periph_clk(LED3_PIO_ID);
 	pio_set_output(LED3_PIO, LED3_PIO_IDX_MASK, 0, 0, 0);
 
-	WDT->WDT_MR = WDT_MR_WDDIS;
+	
 
 	// Inicialização Buttons
 	pmc_enable_periph_clk(BUT1_PIO_ID);
@@ -96,6 +124,12 @@ void init(void)
 
 	pmc_enable_periph_clk(BUT2_PIO_ID);
 	pio_set_input(BUT2_PIO, BUT2_PIO_IDX_MASK, PIO_PULLUP);
+	
+	pmc_enable_periph_clk(BUT3_PIO_ID);
+	pio_set_input(BUT3_PIO, BUT3_PIO_IDX_MASK, PIO_PULLUP);
+	
+	pmc_enable_periph_clk(BUT_PIO_ID);
+	pio_set_input(BUT_PIO, BUT_PIO_IDX_MASK, PIO_PULLUP);
 
 	// Inicialização BUZZER
 	pmc_enable_periph_clk(BUZZER_PIO_ID);
@@ -114,20 +148,21 @@ int main(void)
 		status = pio_get(BUT2_PIO, PIO_INPUT, BUT2_PIO_IDX_MASK);
 		btn1 = pio_get(BUT1_PIO, PIO_INPUT, BUT1_PIO_IDX_MASK);
 
-		if (musica_atual > 4)
-		{
-			musica_atual = 0;
-		}
+		
 
 		if (!btn1)
 		{
 			musica_atual++;
+			if (musica_atual > 4)
+			{
+				musica_atual = 0;
+			}
 			for (int i = 0; i < musica_atual; i++)
 			{
 				pio_set(LED1_PIO, LED1_PIO_IDX_MASK);
-				delay_s(0.1);
+				delay_ms(100);
 				pio_clear(LED1_PIO, LED1_PIO_IDX_MASK);
-				delay_s(0.1);
+				delay_ms(100);
 			}
 		}
 
@@ -144,7 +179,7 @@ int main(void)
 				break;
 
 			case (3):
-				sing(underworld_melody, underworld_tempo, sizeof(underworld_melody / sizeof(underworld_melody[0])));
+				sing(underworld_melody, underworld_tempo, sizeof(underworld_melody)/ sizeof(underworld_melody[0]));
 				break;
 
 			default:
