@@ -2585,10 +2585,10 @@ void system_init_flash( uint32_t ul_clk )
   400f5c:	00400f2d 	.word	0x00400f2d
 
 00400f60 <pause>:
-void sing(int freq[], int tempo[], int size);
-void init();
-
-
+typedef struct{
+	int notes[max];
+	int tempo[max];
+}Musica;
 void pause()
 {
   400f60:	e92d 4ff8 	stmdb	sp!, {r3, r4, r5, r6, r7, r8, r9, sl, fp, lr}
@@ -3118,9 +3118,7 @@ int main(void)
   4013a0:	f642 62fc 	movw	r2, #12028	; 0x2efc
   4013a4:	443a      	add	r2, r7
   4013a6:	6013      	str	r3, [r2, #0]
-		int notes[max];
-		int tempo[max];
-	}Musica;
+
 	
 	Musica piratas;
 	for(int i=0; i< sizeof(pirate_notes)/sizeof(pirate_notes[0]); i++){

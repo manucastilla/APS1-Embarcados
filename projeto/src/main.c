@@ -62,7 +62,11 @@ void pause();
 void sing(int freq[], int tempo[], int size);
 void init();
 
-
+	
+typedef struct{
+	int notes[max];
+	int tempo[max];
+}Musica;
 void pause()
 {
 	delay_s(1);
@@ -148,11 +152,7 @@ int main(void)
 
 	init();
 	int musica_atual = 0;
-	
-	typedef struct{
-		int notes[max];
-		int tempo[max];
-	}Musica;
+
 	
 	Musica piratas;
 	for(int i=0; i< sizeof(pirate_notes)/sizeof(pirate_notes[0]); i++){
