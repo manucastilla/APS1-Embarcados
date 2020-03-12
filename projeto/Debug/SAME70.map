@@ -3225,6 +3225,7 @@ Discarded input sections
  .group         0x00000000        0x8 src/main.o
  .group         0x00000000        0x8 src/main.o
  .group         0x00000000        0x8 src/main.o
+ .group         0x00000000        0x8 src/main.o
  .text          0x00000000        0x0 src/main.o
  .data          0x00000000        0x0 src/main.o
  .bss           0x00000000        0x0 src/main.o
@@ -4009,7 +4010,7 @@ OUTPUT(SAME70.elf elf32-littlearm)
  .debug_ranges  0x00000528       0x20 src/ASF/sam/utils/cmsis/same70/source/templates/system_same70.o
  .debug_ranges  0x00000548       0x40 src/main.o
 
-.debug_macro    0x00000000    0x1c2ea
+.debug_macro    0x00000000    0x1c2fe
  .debug_macro   0x00000000      0x6d1 src/ASF/common/services/clock/same70/sysclk.o
  .debug_macro   0x000006d1      0x8ce src/ASF/common/services/clock/same70/sysclk.o
  .debug_macro   0x00000f9f      0x652 src/ASF/common/services/clock/same70/sysclk.o
@@ -4166,18 +4167,19 @@ OUTPUT(SAME70.elf elf32-littlearm)
  .debug_macro   0x0001a977      0x664 src/ASF/sam/utils/cmsis/same70/source/templates/gcc/startup_same70.o
  .debug_macro   0x0001afdb       0x10 src/ASF/sam/utils/cmsis/same70/source/templates/gcc/startup_same70.o
  .debug_macro   0x0001afeb      0x455 src/ASF/sam/utils/cmsis/same70/source/templates/system_same70.o
- .debug_macro   0x0001b440      0x821 src/main.o
- .debug_macro   0x0001bc61       0x28 src/main.o
- .debug_macro   0x0001bc89       0x23 src/main.o
- .debug_macro   0x0001bcac       0x94 src/main.o
- .debug_macro   0x0001bd40       0x40 src/main.o
- .debug_macro   0x0001bd80       0x88 src/main.o
- .debug_macro   0x0001be08      0x1ce src/main.o
- .debug_macro   0x0001bfd6       0x16 src/main.o
- .debug_macro   0x0001bfec       0x1c src/main.o
- .debug_macro   0x0001c008      0x2e2 src/main.o
+ .debug_macro   0x0001b440      0x783 src/main.o
+ .debug_macro   0x0001bbc3       0x28 src/main.o
+ .debug_macro   0x0001bbeb       0x23 src/main.o
+ .debug_macro   0x0001bc0e       0x94 src/main.o
+ .debug_macro   0x0001bca2       0x40 src/main.o
+ .debug_macro   0x0001bce2       0x88 src/main.o
+ .debug_macro   0x0001bd6a      0x1ce src/main.o
+ .debug_macro   0x0001bf38       0x16 src/main.o
+ .debug_macro   0x0001bf4e       0x1c src/main.o
+ .debug_macro   0x0001bf6a      0x2e2 src/main.o
+ .debug_macro   0x0001c24c       0xb2 src/main.o
 
-.debug_line     0x00000000     0x6b6f
+.debug_line     0x00000000     0x6b7b
  .debug_line    0x00000000      0xc67 src/ASF/common/services/clock/same70/sysclk.o
  .debug_line    0x00000c67      0x9ed src/ASF/common/services/delay/sam/cycle_counter.o
  .debug_line    0x00001654      0xa09 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
@@ -4186,9 +4188,9 @@ OUTPUT(SAME70.elf elf32-littlearm)
  .debug_line    0x0000398c     0x10d5 src/ASF/sam/drivers/pmc/pmc.o
  .debug_line    0x00004a61      0xac0 src/ASF/sam/utils/cmsis/same70/source/templates/gcc/startup_same70.o
  .debug_line    0x00005521      0x819 src/ASF/sam/utils/cmsis/same70/source/templates/system_same70.o
- .debug_line    0x00005d3a      0xe35 src/main.o
+ .debug_line    0x00005d3a      0xe41 src/main.o
 
-.debug_str      0x00000000    0x8965a
+.debug_str      0x00000000    0x89668
  .debug_str     0x00000000    0x8582d src/ASF/common/services/clock/same70/sysclk.o
                               0x85ed2 (size before relaxing)
  .debug_str     0x0008582d      0x1b5 src/ASF/common/services/delay/sam/cycle_counter.o
@@ -4205,8 +4207,8 @@ OUTPUT(SAME70.elf elf32-littlearm)
                               0x8268f (size before relaxing)
  .debug_str     0x00087853      0x172 src/ASF/sam/utils/cmsis/same70/source/templates/system_same70.o
                               0x7281a (size before relaxing)
- .debug_str     0x000879c5     0x1c95 src/main.o
-                              0x87f2d (size before relaxing)
+ .debug_str     0x000879c5     0x1ca3 src/main.o
+                              0x87f3b (size before relaxing)
 
 .debug_frame    0x00000000     0x1b10
  .debug_frame   0x00000000      0x240 src/ASF/common/services/clock/same70/sysclk.o

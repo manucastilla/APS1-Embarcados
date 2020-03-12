@@ -562,6 +562,9 @@
     <Folder Include="src\config\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\functions.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\musicas.h">
       <SubType>compile</SubType>
     </Compile>
