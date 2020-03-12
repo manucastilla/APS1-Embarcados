@@ -128,13 +128,6 @@
 #define NOTE_D8  4699
 #define NOTE_DS8 4978
 
-
-
-#define TRESQUARTOSTEMPO 0.75
-#define TEMPOCOMPLETO 1
-#define MEADETEMPO 0.5
-
-
 //musicas
 
 //piratas do caribe musica

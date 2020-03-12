@@ -1,12 +1,6 @@
 #include "asf.h"
 #include "musicas.h"
 
-// Configuração LED da placa
-#define LED_PIO PIOC
-#define LED_PIO_ID 12
-#define LED_PIO_IDX 8
-#define LED_PIO_IDX_MASK (1 << LED_PIO_IDX)
-
 /*********************************************/
 /* Configurações LEDS 1 a 3                  */
 #define LED1_PIO PIOC
@@ -43,30 +37,31 @@
 #define BUT3_PIO_IDX 13
 #define BUT3_PIO_IDX_MASK (1u << BUT3_PIO_IDX)
 
-// Configuracoes do botao3
-#define BUT_PIO PIOA
-#define BUT_PIO_ID ID_PIOA
-#define BUT_PIO_IDX 11
-#define BUT_PIO_IDX_MASK (1u << BUT_PIO_IDX)
-
 //Configurações buzzer
 #define BUZZER_PIO PIOA
 #define BUZZER_PIO_ID ID_PIOA
 #define BUZZER_PIO_IDX 13
 #define BUZZER_PIO_IDX_MASK (1 << BUZZER_PIO_IDX)
 
-#define max 500
+#define maxMus 500
 
+typedef struct
+{
+	int notes[maxMus];
+	int tempo[maxMus];
+} Musica;
 
-void pause();
+/***********/
+/*Prototype*/
+/***********/
+void pause(void);
 void sing(int freq[], int tempo[], int size);
-void init();
+void init(void);
 
-	
-typedef struct{
-	int notes[max];
-	int tempo[max];
-}Musica;
+
+/***********/
+/*Functions*/
+/***********/
 void pause()
 {
 	delay_s(1);
@@ -114,10 +109,6 @@ void init(void)
 
 	WDT->WDT_MR = WDT_MR_WDDIS;
 
-	//Inicialização LEDs
-	pmc_enable_periph_clk(LED_PIO_ID);
-	pio_set_output(LED_PIO, LED_PIO_IDX_MASK, 0, 0, 0);
-
 	pmc_enable_periph_clk(LED1_PIO_ID);
 	pio_set_output(LED1_PIO, LED1_PIO_IDX_MASK, 0, 0, 0);
 
@@ -137,9 +128,6 @@ void init(void)
 	pmc_enable_periph_clk(BUT3_PIO_ID);
 	pio_set_input(BUT3_PIO, BUT3_PIO_IDX_MASK, PIO_PULLUP);
 
-	pmc_enable_periph_clk(BUT_PIO_ID);
-	pio_set_input(BUT_PIO, BUT_PIO_IDX_MASK, PIO_PULLUP);
-
 	// Inicialização BUZZER
 	pmc_enable_periph_clk(BUZZER_PIO_ID);
 	pio_set_output(BUZZER_PIO, BUZZER_PIO_IDX_MASK, 0, 0, 0);
@@ -153,33 +141,34 @@ int main(void)
 	init();
 	int musica_atual = 0;
 
-	
 	Musica piratas;
-	for(int i=0; i< sizeof(pirate_notes)/sizeof(pirate_notes[0]); i++){
-	piratas.notes[i] = pirate_notes[i];
-	piratas.tempo[i] = pirate_tempo[i];
+	for (unsigned int i = 0; i < sizeof(pirate_notes) / sizeof(pirate_notes[0]); i++)
+	{
+		piratas.notes[i] = pirate_notes[i];
+		piratas.tempo[i] = pirate_tempo[i];
 	}
-	
+
 	Musica mario;
-	for(int i=0; i< sizeof(mario_theme_notes)/sizeof(mario_theme_notes[0]); i++){
+	for (unsigned int i = 0; i < sizeof(mario_theme_notes) / sizeof(mario_theme_notes[0]); i++)
+	{
 		mario.notes[i] = mario_theme_notes[i];
 		mario.tempo[i] = mario_theme_tempo[i];
 	}
-	
+
 	Musica underworld;
-	for(int i=0; i< sizeof(underworld_melody)/sizeof(underworld_melody[0]); i++){
+	for (unsigned int i = 0; i < sizeof(underworld_melody) / sizeof(underworld_melody[0]); i++)
+	{
 		underworld.notes[i] = underworld_melody[i];
 		underworld.tempo[i] = underworld_tempo[i];
 	}
-	
-	//Musica darth;
-	//for(int i=0; i< sizeof(imperial_march_notes)/sizeof(imperial_march_notes[0]); i++){
-		//darth.notes[i] = imperial_march_notes[i];
-		//darth.tempo[i] = imperial_march_tempo[i];
-//	}
 
-	
-	
+	// Musica darth;
+	// for (int i = 0; i < sizeof(imperial_march_notes) / sizeof(imperial_march_notes[0]); i++)
+	// {
+	// 	darth.notes[i] = imperial_march_notes[i];
+	// 	darth.tempo[i] = imperial_march_tempo[i];
+	// }
+
 	while (1)
 	{
 		status = pio_get(BUT2_PIO, PIO_INPUT, BUT2_PIO_IDX_MASK);
@@ -210,11 +199,11 @@ int main(void)
 				break;
 
 			case (2):
-				sing(imperial_march_notes, imperial_march_tempo, sizeof(imperial_march_notes) / sizeof(imperial_march_notes[0]));
+				sing(underworld.notes, underworld.tempo, sizeof(underworld.notes) / sizeof(underworld.notes[0]));
 				break;
 
 			case (3):
-				sing(underworld.notes, underworld.tempo, sizeof(underworld.notes) / sizeof(underworld.notes[0]));
+				sing(imperial_march_notes, imperial_march_tempo, sizeof(imperial_march_notes) / sizeof(imperial_march_notes[0]));
 				break;
 
 			default:
