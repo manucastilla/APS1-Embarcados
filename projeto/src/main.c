@@ -2,13 +2,39 @@
 #include "musicas.h"
 #include "functions.h"
 
-#define maxMus 500
+/***********/
+/*Prototype*/
+/***********/
+void pause(void);
+void sing(int freq[], int tempo[], int size);
+void init(void);
 
-typedef struct
-{
-	int notes[maxMus];
-	int tempo[maxMus];
-} Musica;
+volatile char but1_flag;
+volatile char but2_flag;
+volatile char but3_flag;
+
+void but1_callback(void);
+void but2_callback(void);
+void but3_callback(void);
+
+/**********/
+/*Callback*/
+/**********/
+
+volatile char but1_flag = 0;
+void but1_callback(void){
+	but1_flag = 1;
+}
+
+volatile char but2_flag = 0;
+void but2_callback(void){
+	but2_flag = 1;
+}
+
+volatile char but3_flag = 0;
+void but3_callback(void){
+	but3_flag = 1;
+}
 
 // Função de inicialização do uC
 void init(void)
@@ -28,13 +54,28 @@ void init(void)
 
 	// Inicialização Buttons
 	pmc_enable_periph_clk(BUT1_PIO_ID);
-	pio_set_input(BUT1_PIO, BUT1_PIO_IDX_MASK, PIO_PULLUP);
+	pio_configure(BUT1_PIO, PIO_INPUT, BUT1_PIO_IDX_MASK, PIO_PULLUP);
+	
+	pio_handler_set(BUT1_PIO, BUT1_PIO_ID, BUT1_PIO_IDX_MASK, PIO_IT_FALL_EDGE, but1_callback);
+	pio_enable_interrupt(BUT1_PIO, BUT1_PIO_IDX_MASK);
+	NVIC_EnableIRQ(BUT1_PIO_ID);
+	NVIC_SetPriority(BUT1_PIO_ID, 4);
 
 	pmc_enable_periph_clk(BUT2_PIO_ID);
-	pio_set_input(BUT2_PIO, BUT2_PIO_IDX_MASK, PIO_PULLUP);
+	pio_configure(BUT2_PIO, PIO_INPUT, BUT2_PIO_IDX_MASK, PIO_PULLUP);
+
+	pio_handler_set(BUT2_PIO, BUT2_PIO_ID, BUT2_PIO_IDX_MASK, PIO_IT_FALL_EDGE, but2_callback);
+	pio_enable_interrupt(BUT2_PIO, BUT2_PIO_IDX_MASK);
+	NVIC_EnableIRQ(BUT2_PIO_ID);
+	NVIC_SetPriority(BUT2_PIO_ID, 5);
 
 	pmc_enable_periph_clk(BUT3_PIO_ID);
 	pio_set_input(BUT3_PIO, BUT3_PIO_IDX_MASK, PIO_PULLUP);
+	
+	pio_handler_set(BUT3_PIO, BUT3_PIO_ID, BUT3_PIO_IDX_MASK, PIO_IT_FALL_EDGE, but3_callback);
+	pio_enable_interrupt(BUT3_PIO, BUT3_PIO_IDX_MASK);
+	NVIC_EnableIRQ(BUT3_PIO_ID);
+	NVIC_SetPriority(BUT3_PIO_ID, 6);
 
 	// Inicialização BUZZER
 	pmc_enable_periph_clk(BUZZER_PIO_ID);
@@ -43,10 +84,14 @@ void init(void)
 
 int main(void)
 {
-	int status;
-	int btn1;
+	sysclk_init();
+	WDT->WDT_MR = WDT_MR_WDDIS;
 
 	init();
+	delay_ms(200);
+	but1_flag = 0;
+	but2_flag = 0;
+	but3_flag = 0;
 	int musica_atual = 0;
 
 	Musica piratas;
@@ -78,11 +123,9 @@ int main(void)
 	// }
 
 	while (1)
-	{
-		status = pio_get(BUT2_PIO, PIO_INPUT, BUT2_PIO_IDX_MASK);
-		btn1 = pio_get(BUT1_PIO, PIO_INPUT, BUT1_PIO_IDX_MASK);
-
-		if (!btn1)
+	{	
+		pmc_sleep(SAM_PM_SMODE_SLEEP_WFI);
+		if (but1_flag)
 		{
 			musica_atual++;
 			if (musica_atual > 4)
@@ -96,9 +139,10 @@ int main(void)
 				pio_clear(LED1_PIO, LED1_PIO_IDX_MASK);
 				delay_ms(100);
 			}
+			but1_flag = 0;
 		}
 
-		if (!status)
+		if (but2_flag)
 		{
 			switch (musica_atual)
 			{
@@ -111,13 +155,17 @@ int main(void)
 				break;
 
 			case (3):
-				sing(imperial_march_notes, imperial_march_tempo, sizeof(imperial_march_notes) / sizeof(imperial_march_notes[0]));
+				sing(piratas.notes, piratas.tempo, sizeof(piratas.notes) / sizeof(piratas.notes[0]));
+
 				break;
 
 			default:
-				sing(piratas.notes, piratas.tempo, sizeof(piratas.notes) / sizeof(piratas.notes[0]));
+				sing(imperial_march_notes, imperial_march_tempo, sizeof(imperial_march_notes) / sizeof(imperial_march_notes[0]));
 				break;
+			
 			}
+			
+			but2_flag=0;
 		}
 	}
 	return 0;
