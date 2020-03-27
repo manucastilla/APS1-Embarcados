@@ -1,5 +1,5 @@
 # APS1-Embarcados
-link para [vídeo](https://drive.google.com/file/d/1hq7CcMX19Wzr3KQtEtQPS3rvf2VTzqGl/view?usp=sharing).
+Link para o [vídeo](https://drive.google.com/file/d/1hq7CcMX19Wzr3KQtEtQPS3rvf2VTzqGl/view?usp=sharing).
 
 **Passo a Passo de como usar o projeto**
 1. Ligar os componentes de acordo com o diagrama abaixo.
