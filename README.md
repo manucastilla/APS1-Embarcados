@@ -7,7 +7,7 @@ Link para o [vídeo](https://drive.google.com/file/d/1hq7CcMX19Wzr3KQtEtQPS3rvf2
 3. Abrir e rodar o código.
 - Botão1: selecionar a música
 - Botão2: tocar a música
-- Botão3: play/pause
+- Botão3: ```play/pause```
 
 **As funções são:**
 
