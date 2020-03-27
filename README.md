@@ -9,6 +9,8 @@ Link para o [vídeo](https://drive.google.com/file/d/1hq7CcMX19Wzr3KQtEtQPS3rvf2
 - Botão2: tocar a música
 - Botão3: ```play/pause```
 
+![](desenho_APS1.png)
+
 **As funções são:**
 
 - ```main()```: o main faz com que o LED1 piscam de acordo com a música que está sendo selecionada.
@@ -50,5 +52,3 @@ que toque a música que foi selecionada.
   - C: 
     - [ ] Músicas organizadas em vetores de structs (ponteiros);
     - [x] Cria um arquivo ```.c``` ```.h``` com as funções de reprodução musical.
-
-![](desenho_APS1.png)
