@@ -11,13 +11,13 @@ link para [vídeo](https://drive.google.com/file/d/1hq7CcMX19Wzr3KQtEtQPS3rvf2VT
 
 **As funções são:**
 
-- main(): o main faz com que o LED1 piscam de acordo com a música que está sendo selecionada.
+- ```main()```: o main faz com que o LED1 piscam de acordo com a música que está sendo selecionada.
  Além disso, o LED2 pisca no ritmo da música que está tocando. Por fim, o main possiblita
 que toque a música que foi selecionada.
 
-- pause(): possibilita parar a música e botar play quando quiser.
+- ```pause()```: possibilita parar a música e botar play quando quiser.
 
-- sing: toca a música. Os argumentos passados para essa função são os vetores de frequência e tempo de cada nota musical e o tamanho desses vetores (que deve ser o mesmo).
+- ```sing(int freq[], int tempo[], int size)```: toca a música. Os argumentos passados para essa função são os vetores de frequência e tempo de cada nota musical e o tamanho desses vetores (que deve ser o mesmo).
 
 **Rubricas:**
 - C:
@@ -35,18 +35,20 @@ que toque a música que foi selecionada.
   
 - B:
   - [x] README.md explica o que é o projeto e como o software foi estruturado;
-  - [x] Músicas separadas em .h;
-  - [x] Utiliza struct para organizar as músicas;
-  - [x] Código organizado em funções e que recebem struct contendo música;
-  - [x] Utiliza #define sempre que necessário;
-  - [] Fecha todos os issues que forem abertos no repositório pelo professor (nenhum até o momento);
+  - [x] Músicas separadas em ```.h```;
+  - [x] Utiliza ```struct``` para organizar as músicas;
+  - [x] Código organizado em funções e que recebem ```struct``` contendo música;
+  - [x] Utiliza ```#define``` sempre que necessário;
+  - [ ] Fecha todos os issues que forem abertos no repositório pelo professor (nenhum até o momento);
 - B+:
   - [x] Toca uma terceira música. 
 
 - A (1 item Embarcado + 1 item C):
   - Embarcado:
-    - [] Utiliza dois falantes (para fazer uma música mais complexa);
-    - [x] Utiliza interrupção nos botões
-
+    - [ ] Utiliza dois falantes (para fazer uma música mais complexa);
+    - [x] Utiliza interrupção nos botões.
+  - C: 
+    - [ ] Músicas organizadas em vetores de structs (ponteiros);
+    - [x] Cria um arquivo ```.c``` ```.h``` com as funções de reprodução musical.
 
 ![](desenho_APS1.png)
