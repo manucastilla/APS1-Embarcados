@@ -18,17 +18,17 @@ que toque a música que foi selecionada.
 - sing: toca a música
 
 - Rúbrica c:
- - [x] Repositório com read.me, conexões elétricas, passos de como usar o projeto e link do vídeo
+  - [x] Repositório com read.me, conexões elétricas, passos de como usar o projeto e link do vídeo
 
- - [x] funcionalidade play/pause
+  - [x] funcionalidade play/pause
 
- - [x] Seleção musical
+  - [x] Seleção musical
 
- - [x] produz duas músicas
+  - [x] produz duas músicas
 
- - [x] led piscando de acordo com a música
+  - [x] led piscando de acordo com a música
 
- - [x] indicação de música selecionada
+  - [x] indicação de música selecionada
  
 
 
