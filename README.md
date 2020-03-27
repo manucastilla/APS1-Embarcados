@@ -17,7 +17,8 @@ que toque a música que foi selecionada.
 - pause: possibilita parar a música e botar play quando quiser.
 - sing: toca a música
 
-- Rúbrica c:
+**Rubricas:**
+- C:
   - [x] Repositório com read.me, conexões elétricas, passos de como usar o projeto e link do vídeo
 
   - [x] funcionalidade play/pause
