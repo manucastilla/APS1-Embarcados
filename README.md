@@ -1,6 +1,15 @@
 # APS1-Embarcados
+link para vídeo: https://drive.google.com/file/d/1hq7CcMX19Wzr3KQtEtQPS3rvf2VTzqGl/view?usp=sharing
 
-As funçoes são:
+**Passo a Passo de como usar o projeto**
+1. Ligar os componentes de acordo com o diagrama abaixo.
+2. Conectar a placa no computador. 
+3. Abrir e rodar o código.
+- Botão1: selecionar a música
+- Botão2: tocar a música
+- Botão3: play/pause
+
+**As funçoes são:**
 
 - main: o main faz com que o led1 piscam de acordo com a música que está sendo selecionada.
  Além disso, o led2 pisca no ritmo da música que está tocando. Por fim, o main possiblita
@@ -8,27 +17,30 @@ que toque a música que foi selecionada.
 - pause: possibilita parar a música e botar play quando quiser.
 - sing: toca a música
 
-- [x] Projeto 0: Loop Back
+- Rúbrica c:
+ - [x] Repositório com read.me, conexões elétricas, passos de como usar o projeto e link do vídeo
 
-- [x] Projeto 1: client/server
+ - [x] funcionalidade play/pause
 
-- [x] Projeto 2: datagrama
+ - [x] Seleção musical
 
-- [x] Projeto 3: fragmentação
+ - [x] produz duas músicas
 
-- [x] Projeto 4 - protocolo de comunicação ponto a ponto
+ - [x] led piscando de acordo com a música
 
-- [x] Projeto 5 - CRC
+ - [x] indicação de música selecionada
+ 
 
-- [x] Projeto 6 - serialização
 
-- [x] Projeto 7 - DTMF
+ - [x] Projeto 6 - serialização
 
-- [x] Projeto 8 - Modulação AM
+ - [x] Projeto 7 - DTMF
 
-- [x] Projeto 9 - Modulação e demodulação digital
+ - [x] Projeto 8 - Modulação AM
 
-- [ ] Projeto 10
+ - [x] Projeto 9 - Modulação e demodulação digital
+
+ - [ ] Projeto 10
 
 
 ![](desenho_APS1.png)
