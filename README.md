@@ -11,6 +11,10 @@ Link para o [vídeo](https://drive.google.com/file/d/1hq7CcMX19Wzr3KQtEtQPS3rvf2
 
 ![](desenho_APS1.png)
 
+**Estrutura do projeto **
+-```function.c```: Neste arquivo estão as funções que controlam a música: coloca para tocar
+como também tem a funcionalidade de play/pause.
+
 **As funções são:**
 
 - ```main()```: o main faz com que o LED1 piscam de acordo com a música que está sendo selecionada.
