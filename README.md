@@ -1,4 +1,7 @@
 # APS1-Embarcados
+**Descrição**
+Sistema embarcado que produz músicas monofômicas.
+
 Link para o [vídeo](https://drive.google.com/file/d/1hq7CcMX19Wzr3KQtEtQPS3rvf2VTzqGl/view?usp=sharing).
 
 **Passo a Passo de como usar o projeto**
@@ -14,6 +17,13 @@ Link para o [vídeo](https://drive.google.com/file/d/1hq7CcMX19Wzr3KQtEtQPS3rvf2
 **Estrutura do projeto**
 - ```function.c```: Neste arquivo estão as funções que controlam a música: coloca para tocar
 como também tem a funcionalidade de play/pause.
+- ```functions.h```: Neste arquivo definimos nosso buzzer,botões e leds de acordo com seus PIOs.
+Além disso, definimos nosso struct de música na qual contém as notas e o tempo de cada nota.
+- ```musicas.h```: está as notas e o tempo de cada música selecionada para tocar.
+- ```main.c```: no main chamamos functions.h e musicas.h. Neste criamos flags/ interrupções possibilitando 
+que nossos botões tenham funcionalidade. Além disso, há a inicialização do uC. Por fim, no main
+está a função que faz com que o programe rode e os leds pisquem.
+
 
 **As funções são:**
 
