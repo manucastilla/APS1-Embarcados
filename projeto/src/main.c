@@ -59,7 +59,7 @@ void init(void)
 	pio_handler_set(BUT1_PIO, BUT1_PIO_ID, BUT1_PIO_IDX_MASK, PIO_IT_FALL_EDGE, but1_callback);
 	pio_enable_interrupt(BUT1_PIO, BUT1_PIO_IDX_MASK);
 	NVIC_EnableIRQ(BUT1_PIO_ID);
-	NVIC_SetPriority(BUT1_PIO_ID, 4);
+	NVIC_SetPriority(BUT1_PIO_ID, BUT1_priority);
 
 	pmc_enable_periph_clk(BUT2_PIO_ID);
 	pio_configure(BUT2_PIO, PIO_INPUT, BUT2_PIO_IDX_MASK, PIO_PULLUP);
@@ -67,7 +67,7 @@ void init(void)
 	pio_handler_set(BUT2_PIO, BUT2_PIO_ID, BUT2_PIO_IDX_MASK, PIO_IT_FALL_EDGE, but2_callback);
 	pio_enable_interrupt(BUT2_PIO, BUT2_PIO_IDX_MASK);
 	NVIC_EnableIRQ(BUT2_PIO_ID);
-	NVIC_SetPriority(BUT2_PIO_ID, 5);
+	NVIC_SetPriority(BUT2_PIO_ID, BUT2_priority);
 
 	pmc_enable_periph_clk(BUT3_PIO_ID);
 	pio_set_input(BUT3_PIO, BUT3_PIO_IDX_MASK, PIO_PULLUP);
@@ -75,11 +75,19 @@ void init(void)
 	pio_handler_set(BUT3_PIO, BUT3_PIO_ID, BUT3_PIO_IDX_MASK, PIO_IT_FALL_EDGE, but3_callback);
 	pio_enable_interrupt(BUT3_PIO, BUT3_PIO_IDX_MASK);
 	NVIC_EnableIRQ(BUT3_PIO_ID);
-	NVIC_SetPriority(BUT3_PIO_ID, 6);
+	NVIC_SetPriority(BUT3_PIO_ID, BUT3_priority);
 
 	// Inicialização BUZZER
 	pmc_enable_periph_clk(BUZZER_PIO_ID);
 	pio_set_output(BUZZER_PIO, BUZZER_PIO_IDX_MASK, 0, 0, 0);
+}
+
+void music_setup_notes(Musica* musica, int notas[maxMus], int tempo[maxMus], int notas_size) {
+	for (unsigned int i = 0; i < notas_size; i++)
+	{
+		musica->notes[i] = notas[i];
+		musica->tempo[i] = tempo[i];
+	}
 }
 
 int main(void)
@@ -94,33 +102,12 @@ int main(void)
 	but3_flag = 0;
 	int musica_atual = 0;
 
-	Musica piratas;
-	for (unsigned int i = 0; i < sizeof(pirate_notes) / sizeof(pirate_notes[0]); i++)
-	{
-		piratas.notes[i] = pirate_notes[i];
-		piratas.tempo[i] = pirate_tempo[i];
-	}
+	Musica piratas, mario, underworld;
+	music_setup_notes(&piratas, pirate_notes, pirate_tempo, sizeof(pirate_notes) / sizeof(pirate_notes[0]));
 
-	Musica mario;
-	for (unsigned int i = 0; i < sizeof(mario_theme_notes) / sizeof(mario_theme_notes[0]); i++)
-	{
-		mario.notes[i] = mario_theme_notes[i];
-		mario.tempo[i] = mario_theme_tempo[i];
-	}
+	music_setup_notes(&mario, mario_theme_notes, mario_theme_tempo, sizeof(mario_theme_notes) / sizeof(mario_theme_notes[0]));
 
-	Musica underworld;
-	for (unsigned int i = 0; i < sizeof(underworld_melody) / sizeof(underworld_melody[0]); i++)
-	{
-		underworld.notes[i] = underworld_melody[i];
-		underworld.tempo[i] = underworld_tempo[i];
-	}
-
-	// Musica darth;
-	// for (int i = 0; i < sizeof(imperial_march_notes) / sizeof(imperial_march_notes[0]); i++)
-	// {
-	// 	darth.notes[i] = imperial_march_notes[i];
-	// 	darth.tempo[i] = imperial_march_tempo[i];
-	// }
+	music_setup_notes(&underworld, underworld_melody, underworld_tempo, sizeof(underworld_melody) / sizeof(underworld_melody[0]));
 
 	while (1)
 	{	

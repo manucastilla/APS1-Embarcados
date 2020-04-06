@@ -51,6 +51,10 @@
 #define BUZZER_PIO_IDX 13
 #define BUZZER_PIO_IDX_MASK (1 << BUZZER_PIO_IDX)
 
+#define BUT1_priority 4
+#define BUT2_priority 5
+#define BUT3_priority 6
+
 #define maxMus 500
 
 typedef struct

@@ -32,10 +32,13 @@ void sing(int freq[], int tempo[], int size)
 			pause();
 		}
 
+		// 1000000 microsegundos = 1 segundo 
+		// multiplicado por 1/frequência equivale ao tempo que a nota tem que ser tocada
 		int delay = 1000000 / freq[note];
 
 		pio_clear(LED2_PIO, LED2_PIO_IDX_MASK);
 
+		// 1000 => para ser microsegundos
 		for (int i = 0; i < 1000 * tempo[note] / delay; i++)
 		{
 			pio_set(BUZZER_PIO, BUZZER_PIO_IDX_MASK);
