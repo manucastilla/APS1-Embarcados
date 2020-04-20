@@ -56,7 +56,7 @@ que toque a música que foi selecionada.
   - [x] Utiliza ```struct``` para organizar as músicas;
   - [x] Código organizado em funções e que recebem ```struct``` contendo música;
   - [x] Utiliza ```#define``` sempre que necessário;
-  - [ ] Fecha todos os issues que forem abertos no repositório pelo professor (nenhum até o momento);
+  - [x] Fecha todos os issues que forem abertos no repositório pelo professor;
 - B+:
   - [x] Toca uma terceira música. 
 
